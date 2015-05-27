@@ -6,7 +6,14 @@
 @prefix qt:     <http://www.w3.org/2001/sw/DataAccess/tests/test-query#> .
 
 <>  rdf:type mf:Manifest ;
-    rdfs:comment "Tests for GRAPH" ;
+    rdfs:label "Dataset" ;
+    rdfs:comment """
+Tests for query dataset specification with FROM and FROM NAMED and changing the
+active graph through use of the GRAPH keyword. Tests which require the processor
+to dereference graphs in the dataset specification include mf:DereferenceGraphURI as
+a requirement.
+(http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#specifyingDataset,
+http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#security)""" ;
     mf:entries
     (
 	:dawg-dataset-01
@@ -24,154 +31,370 @@
 	:dawg-dataset-09b
 	:dawg-dataset-10b
 	:dawg-dataset-12b
+
+	:dawg-dataset-01-local
+	:dawg-dataset-02-local
+	:dawg-dataset-03-local
+	:dawg-dataset-04-local
+	:dawg-dataset-05-local
+	:dawg-dataset-06-local
+	:dawg-dataset-07-local
+	:dawg-dataset-08-local
+	:dawg-dataset-09-local-document-scope
+	:dawg-dataset-09-local-graph-scope
+	:dawg-dataset-11-local
+	:dawg-dataset-09b-local
+	:dawg-dataset-10b-local-document-scope
+	:dawg-dataset-10b-local-graph-scope
+	:dawg-dataset-12b-local
    ).
 
 :dawg-dataset-01  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-01" ;
-    rdfs:comment  "Data: default dataset / Query: default dataset" ;
+    rdfs:comment  "Data: default dataset (dereferenced) / Query: default dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query  <dataset-01.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-01.ttl> ;
+    .
+
+:dawg-dataset-01-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-01 local" ;
+    rdfs:comment  "Data: default dataset (local) / Query: default dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query  <dataset-01.rq> ;
+              qt:graphData   <data-g1.ttl> ] ;
     mf:result  <dataset-01.ttl> ;
     .
 
 :dawg-dataset-02  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-02" ;
-    rdfs:comment  "Data: named dataset / Query: default dataset" ;
+    rdfs:comment  "Data: named dataset (dereferenced) / Query: default dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query       <dataset-02.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-02.ttl> ;
+    .
+
+:dawg-dataset-02-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-02 local" ;
+    rdfs:comment  "Data: named dataset (local) / Query: default dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query       <dataset-02.rq> ;
+              qt:graphData   <data-g1.ttl> ] ;
     mf:result  <dataset-02.ttl> ;
     .
 
 :dawg-dataset-03  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-03" ;
-    rdfs:comment  "Data: named dataset / Query: named dataset dataset" ;
+    rdfs:comment  "Data: named dataset (dereferenced) / Query: named dataset dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query       <dataset-03.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-03.ttl> ;
+    .
+
+:dawg-dataset-03-local  rdf:type mf:QueryEvaluationTest ;
+    mf:name "dataset-03 local" ;
+    rdfs:comment  "Data: named dataset (local) / Query: named dataset dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query       <dataset-03.rq> ;
+              qt:graphData   <data-g1.ttl> ] ;
     mf:result  <dataset-03.ttl> ;
     .
 
 :dawg-dataset-04  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-04" ;
-    rdfs:comment  "Data: named dataset / Query: default dataset" ;
+    rdfs:comment  "Data: named dataset (dereferenced) / Query: default dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query       <dataset-04.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-04.ttl> ;
+    .
+
+:dawg-dataset-04-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-04 local" ;
+    rdfs:comment  "Data: named dataset (local) / Query: default dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query       <dataset-04.rq> ;
+              qt:graphData       <data-g1.ttl> ] ;
     mf:result  <dataset-04.ttl> ;
     .
 
 :dawg-dataset-05  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-05" ;
-    rdfs:comment  "Data: default and named / Query: default dataset" ;
+    rdfs:comment  "Data: default and named (dereferenced) / Query: default dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-05.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-05.ttl> ;
+    .
+
+:dawg-dataset-05-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-05 local" ;
+    rdfs:comment  "Data: default and named (local) / Query: default dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query       <dataset-05.rq> ;
+              qt:graphData   <data-g1.ttl> ;
+              qt:graphData   <data-g2.ttl> ] ;
     mf:result  <dataset-05.ttl> ;
     .
 
 :dawg-dataset-06  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-06" ;
-    rdfs:comment  "Data: default and named / Query: named dataset" ;
+    rdfs:comment  "Data: default and named (dereferenced) / Query: named dataset" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-06.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-06.ttl> ;
+    .
+
+:dawg-dataset-06-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-06 local" ;
+    rdfs:comment  "Data: default and named (local) / Query: named dataset" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-06.rq> ;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g2.ttl> ] ;
     mf:result  <dataset-06.ttl> ;
     .
 
 :dawg-dataset-07  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-07" ;
-    rdfs:comment  "Data: default and named / Query: all data by UNION" ;
+    rdfs:comment  "Data: default and named (dereferenced) / Query: all data by UNION" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-07.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-07.ttl> ;
+    .
+
+:dawg-dataset-07-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-07 local" ;
+    rdfs:comment  "Data: default and named (local) / Query: all data by UNION" ;
+    mf:action
+            [ qt:query        <dataset-07.rq> ;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g2.ttl> ] ;
     mf:result  <dataset-07.ttl> ;
     .
 
 :dawg-dataset-08  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-08" ;
-    rdfs:comment  "Data: default and named / Query: common subjects" ;
+    rdfs:comment  "Data: default and named (dereferenced) / Query: common subjects" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-08.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-08.ttl> ;
+    .
+
+:dawg-dataset-08-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-08 local" ;
+    rdfs:comment  "Data: default and named (local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-08.rq>;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g2.ttl> ] ;
     mf:result  <dataset-08.ttl> ;
     .
 
 :dawg-dataset-09  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-09" ;
-    rdfs:comment  "Data: default and named (bnodes) / Query: common subjects" ;
+    rdfs:comment  "Data: default and named (bnodes, dereferenced) / Query: common subjects" ;
     dawgt:approval dawgt:Withdrawn ;
     #dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-09.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
     mf:result  <dataset-09.ttl> ;
     .
 
+:dawg-dataset-09-local-document-scope  rdf:type mf:QueryEvaluationTest ;
+    mf:name "dataset-09 local with document scope" ;
+    rdfs:comment  "Data: default and named (bnodes, local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-09.rq> ;
+              qt:graphData    <data-g3.ttl> ] ;
+    mf:requires mf:BlankNodeLabelScopeIsDocument ;
+    mf:result  <dataset-09.ttl> ;
+    .
+
+:dawg-dataset-09-local-graph-scope  rdf:type mf:QueryEvaluationTest ;
+    mf:name "dataset-09 local with graph scope" ;
+    rdfs:comment  "Data: default and named (bnodes, local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-09.rq> ;
+              qt:graphData    <data-g3.ttl> ] ;
+    mf:requires mf:BlankNodeLabelScopeIsGraph ;
+    mf:result  <dataset-09-graph-scope.ttl> ;
+    .
+
 :dawg-dataset-09b  rdf:type mf:QueryEvaluationTest ;
-	mf:name "dataset-09b" ;
-    rdfs:comment  "Data: default and named (bnodes) / Query: common subjects" ;
+    mf:name "dataset-09b" ;
+    rdfs:comment  "Data: default and named (bnodes, dereferenced) / Query: common subjects" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2007/10/09-dawg-minutes.html> ;
     mf:action
             [ qt:query        <dataset-09b.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-09.ttl> ;
+    .
+
+:dawg-dataset-09b-local  rdf:type mf:QueryEvaluationTest ;
+    mf:name "dataset-09b local" ;
+    rdfs:comment  "Data: default and named (bnodes, local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-09b.rq> ;
+              qt:graphData    <data-g3.ttl> ;
+              qt:graphData    <data-g3.ttl> ] ;
     mf:result  <dataset-09.ttl> ;
     .
 
 :dawg-dataset-10  rdf:type mf:QueryEvaluationTest ;
-	mf:name "dataset-10" ;
-    rdfs:comment  "Data: default and named (same data, with bnodes) / Query: common subjects" ;
+    mf:name "dataset-10" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes, dereferenced) / Query: common subjects" ;
     dawgt:approval dawgt:Withdrawn ;
     #dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
     mf:action
             [ qt:query        <dataset-10.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
     mf:result  <dataset-10.ttl> ;
     .
 
 :dawg-dataset-10b  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-10b" ;
-    rdfs:comment  "Data: default and named (same data, with bnodes) / Query: common subjects" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes, dereferenced) / Query: common subjects" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2007/10/09-dawg-minutes.html> ;
     mf:action
             [ qt:query        <dataset-10b.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
     mf:result  <dataset-10.ttl> ;
+    .
+
+:dawg-dataset-10b-local-document-scope  rdf:type mf:QueryEvaluationTest ;
+    mf:name "dataset-10b local with document scope" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes, local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-10b.rq> ;
+              qt:graphData    <data-g3-dup.ttl> ;
+              qt:graphData    <data-g3.ttl> ] ;
+    mf:requires mf:BlankNodeLabelScopeIsDocument ;
+    mf:result  <dataset-10.ttl> ;
+    .
+
+:dawg-dataset-10b-local-graph-scope  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-10b local with graph scope" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes, local) / Query: common subjects" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-10b.rq> ;
+              qt:graphData    <data-g3-dup.ttl> ;
+              qt:graphData    <data-g3.ttl> ] ;
+    mf:requires mf:BlankNodeLabelScopeIsGraph ;
+    mf:result  <dataset-10-graph-scope.ttl> ;
     .
 
 :dawg-dataset-11  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-11" ;
-    rdfs:comment  "Data: default and named (several) / Query: get everything" ;
+    rdfs:comment  "Data: default and named (several, dereferenced) / Query: get everything" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0118/04-dawg-minutes.html> ;
     mf:action
             [ qt:query        <dataset-11.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-11.ttl> ;
+    .
+
+:dawg-dataset-11-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-11 local" ;
+    rdfs:comment  "Data: default and named (several, local) / Query: get everything" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-11.rq> ;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g2.ttl> ;
+              qt:graphData    <data-g3.ttl> ;
+              qt:graphData    <data-g4.ttl> ] ;
     mf:result  <dataset-11.ttl> ;
     .
 
 :dawg-dataset-12  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-12" ;
-    rdfs:comment  "Data: default (several) and named (several) / Query: get everything" ;
+    rdfs:comment  "Data: default (several, dereferenced) and named (several, dereferenced) / Query: get everything" ;
     dawgt:approval dawgt:Withdrawn ;
     #dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0118/04-dawg-minutes.html> ;
     mf:action
             [ qt:query        <dataset-12.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
     mf:result  <dataset-12.ttl> ;
     .
 
 :dawg-dataset-12b  rdf:type mf:QueryEvaluationTest ;
 	mf:name "dataset-12b" ;
-    rdfs:comment  "Data: default (several) and named (several) / Query: get everything" ;
+    rdfs:comment  "Data: default (several, dereferenced) and named (several, dereferenced) / Query: get everything" ;
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2007/10/09-dawg-minutes.html> ;
     mf:action
             [ qt:query        <dataset-12b.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <dataset-12.ttl> ;
+    .
+
+:dawg-dataset-12b-local  rdf:type mf:QueryEvaluationTest ;
+	mf:name "dataset-12b local" ;
+    rdfs:comment  "Data: default (several, local) and named (several, local) / Query: get everything" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query        <dataset-12b.rq> ;
+              qt:graphData    <data-g1-dup.ttl> ;
+              qt:graphData    <data-g2-dup.ttl> ;
+              qt:graphData    <data-g3-dup.ttl> ;
+              qt:graphData    <data-g4-dup.ttl> ;
+              qt:graphData    <data-g1.ttl> ;
+              qt:graphData    <data-g2.ttl> ;
+              qt:graphData    <data-g3.ttl> ;
+              qt:graphData    <data-g4.ttl> ] ;
     mf:result  <dataset-12.ttl> ;
     .

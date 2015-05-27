@@ -17,9 +17,13 @@
 	:dawg-graph-06
 	:dawg-graph-07
 	:dawg-graph-08
-	:dawg-graph-09
-	:dawg-graph-10
-	:dawg-graph-10b
+	# :dawg-graph-09
+	:dawg-graph-09-structural
+	:dawg-graph-09-stable
+	# :dawg-graph-10 # withdrawn
+	# :dawg-graph-10b
+	:dawg-graph-10b-structural
+	:dawg-graph-10b-stable
 	:dawg-graph-11
    ).
 
@@ -136,6 +140,32 @@
     mf:result  <graph-09.ttl> ;
     .
 
+:dawg-graph-09-structural  rdf:type mf:QueryEvaluationTest ;
+	mf:name "graph-09" ;
+    rdfs:comment  "Data: default and named (bnodes) / Query: distinct subjects, as the node scope is the import" ;
+    dawgt:approval dawgt:Approved ;
+    dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
+    mf:action
+            [ qt:query        <graph-09.rq> ;
+              qt:data         <data-g3.ttl> ;
+              qt:graphData    <data-g4-structural.ttl> ;
+            ] ;
+    mf:result  <graph-09.ttl> ;
+    .
+
+:dawg-graph-09-stable  rdf:type mf:QueryEvaluationTest ;
+	mf:name "graph-09" ;
+    rdfs:comment  "Data: default and named (bnodes) / Query: identical subject, as the node scope is global" ;
+    dawgt:approval dawgt:Approved ;
+    dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0047/31-dawg-minutes> ;
+    mf:action
+            [ qt:query        <graph-09.rq> ;
+              qt:data         <data-g3.ttl> ;
+              qt:graphData    <data-g4.ttl> ;
+            ] ;
+    mf:result  <graph-09-stable.ttl> ;
+    .
+
 :dawg-graph-10  rdf:type mf:QueryEvaluationTest ;
 	mf:name "graph-10" ;
     rdfs:comment  "Data: default and named (same data, with bnodes) / Query: common subjects" ;
@@ -160,6 +190,28 @@
               qt:graphData    <data-g3-dup.ttl> ;
             ] ;
     mf:result  <graph-10.ttl> ;
+    .
+
+:dawg-graph-10b-structural  rdf:type mf:QueryEvaluationTest ;
+	mf:name "graph-10" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes) / Query: distinct subjects, as node scope is the import" ;
+    mf:action
+            [ qt:query        <graph-10.rq> ;
+              qt:data         <data-g3.ttl> ;
+              qt:graphData    <data-g3-dup.ttl> ;
+            ] ;
+    mf:result  <graph-10.ttl> ;
+    .
+
+:dawg-graph-10b-stable  rdf:type mf:QueryEvaluationTest ;
+	mf:name "graph-10" ;
+    rdfs:comment  "Data: default and named (same data, with bnodes) / Query: identical subjects, as the node scope is global" ;
+    mf:action
+            [ qt:query        <graph-10.rq> ;
+              qt:data         <data-g3.ttl> ;
+              qt:graphData    <data-g3-dup.ttl> ;
+            ] ;
+    mf:result  <graph-10-stable.ttl> ;
     .
 
 :dawg-graph-11  rdf:type mf:QueryEvaluationTest ;

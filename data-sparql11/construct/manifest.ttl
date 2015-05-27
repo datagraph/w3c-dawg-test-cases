@@ -13,6 +13,7 @@
     :constructwhere02
     :constructwhere03
     :constructwhere04
+    :constructwhere04-local
     :constructwhere05
     :constructwhere06
     ) .
@@ -49,6 +50,7 @@
            qt:data   <data.ttl> ] ;
     mf:result  <constructwhere03result.ttl>
     .
+
 :constructwhere04 rdf:type mf:QueryEvaluationTest ;
     mf:name    "constructwhere04 - CONSTRUCT WHERE" ;
     rdfs:comment "CONSTRUCT WHERE  with DatasetClause";
@@ -56,6 +58,18 @@
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2011-02-01#resolution_3> ;
     mf:action
          [ qt:query  <constructwhere04.rq> ] ;
+    mf:requires mf:DereferenceGraphURI ;
+    mf:result  <constructwhere04result.ttl>
+    .
+
+:constructwhere04-local rdf:type mf:QueryEvaluationTest ;
+    mf:name    "constructwhere04 - CONSTRUCT WHERE local dataset" ;
+    rdfs:comment "CONSTRUCT WHERE  with DatasetClause";
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+         [ qt:query  <constructwhere04.rq> ;
+           qt:graphData   <data.ttl> ] ;
     mf:result  <constructwhere04result.ttl>
     .
 

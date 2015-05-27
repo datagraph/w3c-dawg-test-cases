@@ -51,6 +51,7 @@
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0087/14-dawg-minutes.html> ;
     mf:action [ qt:query <bgp-no-match.rq> ; qt:data <data-7.ttl> ] ;
+    mf:requires mf:UndefinedVariablesAreUnbound ;
     mf:result <bgp-no-match.srx> ;
     .
 :prefix-name-1 rdf:type mf:QueryEvaluationTest ;

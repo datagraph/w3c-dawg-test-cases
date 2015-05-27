@@ -20,5 +20,8 @@
       rs:solution
                   [ rs:binding  [ rs:value    "TITLE 2" ;
                                   rs:variable  "title"
+                                ];
+                    rs:binding  [ rs:value    20 ;
+                                  rs:variable  "price"
                                 ]
                   ] .

@@ -61,7 +61,48 @@
 
 :dawg-optional-filter-005-not-simplified a mf:QueryEvaluationTest ;
       mf:name    "dawg-optional-filter-005-not-simplified";
-      rdfs:comment "Double curly braces do NOT get simplified to single curly braces early on, before filters are scoped";
+      rdfs:comment """Double curly braces DO are reduced by the parser, before filters are scoped; the query parse yields
+(select
+   (leftjoin
+    (bgp
+      (triple ?::book <http://purl.org/dc/elements/1.1/title> ?::title))
+    (bgp
+      (triple ?::book <http://example.org/ns#price> ?::price))
+    :TEST (= ?::title "TITLE 2"))
+   (?::title ?::price))
+
+Where the intent is to limit the scope of a filter clause, the interoperable form would be
+
+PREFIX  dc: <http://purl.org/dc/elements/1.1/>
+PREFIX  x: <http://example.org/ns#>
+SELECT  ?title ?price
+WHERE
+    { ?book dc:title ?title . 
+      OPTIONAL
+        { select * where {
+          
+            ?book x:price ?price . 
+            FILTER (?title = 'TITLE 2') .
+         }
+        } .
+    }
+
+which would yield
+
+(select
+   (leftjoin
+    (bgp
+      (triple ?::book <http://purl.org/dc/elements/1.1/:title> ?::title))
+    (select
+     (filter
+      (bgp
+        (triple ?::book <http://example.org/ns#price> ?::price))
+      (= ?::title "TITLE 2"))
+     (?::book ?::price ?::title)))
+   (?::title ?::price))
+
+which better expresses the intent.
+""";
        mf:action
           [ qt:query  <expr-5.rq> ;
             qt:data   <data-1.ttl> ] ;

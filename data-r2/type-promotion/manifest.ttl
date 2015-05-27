@@ -320,6 +320,7 @@
               qt:query  <tP-short-short-fail.rq> ] ;
         mf:result  <false.ttl> 
      .
+
 :type-promotion-24 rdf:type mf:QueryEvaluationTest ;
         mf:name    "tP-byte-short-fail" ;
         qt:queryForm qt:QueryAsk ;

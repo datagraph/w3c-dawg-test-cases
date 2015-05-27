@@ -12,3 +12,13 @@ Additional branches serve specific implementations:
 
 - datagraph : Datagraph's SPARQL implementation
 
+
+## Datagraph's variations
+
+This branch introduces several capabilities in order to account for semantic variations between stores
+with respect to
+- RDF 1.0 v/s 1.1 term semantics (LiteralLexicalForms v/s LiteralValues)
+- term value canonicalization, normalization, and implicit entailment ()
+- implicit dataset reification (DereferenceGraphURI)
+- operator sematics which permit all types (ClosedModel v/s PartialModel)
+- Constraints on undefined variables (UndefinedVariablesAreUnbound v/s UndefinedVariablesAreInvalid)

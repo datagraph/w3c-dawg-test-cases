@@ -4,6 +4,7 @@
 @prefix mf:     <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
 @prefix qt:     <http://www.w3.org/2001/sw/DataAccess/tests/test-query#> .
 @prefix dawgt:   <http://www.w3.org/2001/sw/DataAccess/tests/test-dawg#> .
+@prefix http:   <http://www.w3.org/2011/http-statusCodes#> .
 
 <>  rdf:type mf:Manifest ;
     rdfs:label "Algebra" ;
@@ -18,7 +19,8 @@
         :filter-place-3 
         :filter-nested-1 
         :filter-nested-2 
-        :filter-scope-1 
+	# :filter-scope-1 
+        :filter-scope-1-strict
         :join-scope-1
         :join-combo-1 
         :join-combo-2
@@ -161,7 +163,20 @@
          mf:action
             [ qt:query  <filter-scope-1.rq> ;
               qt:data   <data-2.ttl>  ] ;
+        mf:requires mf:UndefinedVariablesAreUnbound ;
         mf:result  <filter-scope-1.srx> .
+
+:filter-scope-1-strict rdf:type mf:QueryEvaluationTest ;
+         mf:name    "Filter-scope - 1 strict" ;
+         rdfs:comment "FILTERs in an OPTIONAL do not extend to variables bound outside of the LeftJoin(...) operation" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+         mf:action
+            [ qt:query  <filter-scope-1.rq> ;
+              qt:data   <data-2.ttl>  ] ;
+        mf:requires mf:UndefinedVariablesAreInvalid ;
+        mf:result  http:BadRequest
+    .
       
 
 :join-scope-1 rdf:type mf:QueryEvaluationTest ;

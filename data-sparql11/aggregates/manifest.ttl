@@ -132,6 +132,7 @@
     rdfs:comment "grouping by expression, done wrong";
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2012-01-31#resolution_3> ;
+    mf:requires mf:ParserEnforcesSemantics ;
     mf:action  <agg08.rq> .
 
 :agg08b rdf:type  mf:QueryEvaluationTest;
@@ -151,6 +152,7 @@
     rdfs:comment "Projection of an ungrouped variable (not appearing in the GROUP BY expression)";
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2012-01-31#resolution_3> ;
+    mf:requires mf:ParserEnforcesSemantics ;
     mf:action  <agg09.rq> .
 
 :agg10 rdf:type  mf:NegativeSyntaxTest11;
@@ -159,6 +161,7 @@
     rdfs:comment "Projection of an ungrouped variable (no GROUP BY expression at all)";
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2012-01-31#resolution_3> ;
+    mf:requires mf:ParserEnforcesSemantics ;
     mf:action  <agg10.rq> .
 
 :agg11 rdf:type  mf:NegativeSyntaxTest11;
@@ -167,6 +170,7 @@
     rdfs:comment "Use of an ungrouped variable in a project expression";
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2012-01-31#resolution_3> ;
+    mf:requires mf:ParserEnforcesSemantics ;
     mf:action  <agg11.rq> .
 
 :agg12 rdf:type  mf:NegativeSyntaxTest11;
@@ -175,6 +179,7 @@
     rdfs:comment "Use of an ungrouped variable in a project expression, where the variable appears in a GROUP BY expression";
     dawgt:approval dawgt:Approved ;
     dawgt:approvedBy <http://www.w3.org/2009/sparql/meeting/2012-01-31#resolution_3> ;
+    mf:requires mf:ParserEnforcesSemantics ;
     mf:action  <agg12.rq> .
 
 :agg-groupconcat-01 rdf:type mf:QueryEvaluationTest ;

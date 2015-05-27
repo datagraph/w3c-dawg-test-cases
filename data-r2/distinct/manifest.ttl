@@ -11,6 +11,7 @@
     ( 
       :no-distinct-1
       :distinct-1
+      :distinct-1-by-value
       :no-distinct-2
       :distinct-2
       :no-distinct-3
@@ -29,6 +30,7 @@
     mf:action
             [ qt:query <distinct-star-1.rq> ;
               qt:data <data-star.ttl> ] ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result <distinct-star-1.srx> .
 
 :no-distinct-1 rdf:type mf:QueryEvaluationTest ;
@@ -47,7 +49,18 @@
     mf:action
             [ qt:query  <distinct-1.rq> ;
               qt:data   <data-num.ttl> ] ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <distinct-num.srx> .
+
+:distinct-1-by-value rdf:type mf:QueryEvaluationTest ;
+    mf:name    "Numbers: Distinct by value" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query  <distinct-1.rq> ;
+              qt:data   <data-num.ttl> ] ;
+    mf:requires mf:LiteralValues ;
+    mf:result  <distinct-num-by-value.srx> .
 
 :no-distinct-2 rdf:type mf:QueryEvaluationTest ;
     mf:name    "Strings: No distinct" ;
@@ -65,7 +78,18 @@
     mf:action
             [ qt:query  <distinct-1.rq> ;
               qt:data   <data-str.ttl> ] ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <distinct-str.srx> .
+
+:distinct-2-by-value rdf:type mf:QueryEvaluationTest ;
+    mf:name    "Strings: Distinct" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query  <distinct-1.rq> ;
+              qt:data   <data-str.ttl> ] ;
+    mf:requires mf:LiteralValues ;
+    mf:result  <distinct-str-by-value.srx> .
 
 :no-distinct-3 rdf:type mf:QueryEvaluationTest ;
     mf:name    "Nodes: No distinct" ;
@@ -125,4 +149,18 @@
               ##qt:data   <data-num.ttl> , <data-str.ttl> , <data-node.ttl> 
               qt:data <data-all.ttl>
             ] ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <distinct-all.srx> .
+
+:distinct-9-by-value rdf:type mf:QueryEvaluationTest ;
+    mf:name    "All: Distinct by value" ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:action
+            [ qt:query  <distinct-1.rq> ;
+              ##qt:data   <data-num.ttl> , <data-str.ttl> , <data-node.ttl> 
+              qt:data <data-all.ttl>
+            ] ;
+    mf:requires mf:LiteralLexicalForms ;
+    mf:result  <distinct-all-by-value.srx> .
+

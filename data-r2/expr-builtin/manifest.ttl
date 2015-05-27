@@ -10,7 +10,8 @@
 <>  rdf:type mf:Manifest ;
     rdfs:comment  "DAWG Expression tests: Built-ins" ;
     mf:entries
-    ( :dawg-str-1 :dawg-str-2 :dawg-str-3 :dawg-str-4
+    ( :dawg-str-1 :dawg-str-1-by-value
+      :dawg-str-2 :dawg-str-3 :dawg-str-4
       :dawg-isBlank-1 :dawg-isLiteral-1 :dawg-datatype-1 :dawg-datatype-2 :dawg-datatype-3
       :dawg-lang-1 :dawg-lang-2 :dawg-lang-3 :dawg-isURI-1
       :dawg-isIRI-1 :dawg-langMatches-1 :dawg-langMatches-2 
@@ -18,6 +19,7 @@
       :lang-case-insensitive-eq
       :lang-case-insensitive-ne
       :sameTerm-simple :sameTerm-eq :sameTerm-not-eq
+      :sameTerm-simple-by-value :sameTerm-eq-by-value :sameTerm-not-eq-by-value
     ).
 
 :dawg-isLiteral-1 a mf:QueryEvaluationTest ;
@@ -35,14 +37,27 @@
 	[ qt:query  <q-str-1.rq> ;
 	  qt:data   <data-builtin-1.ttl> ] ;
      mf:result  <result-str-1.ttl> ;
+     mf:requires mf:LiteralLexicalForms ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007AprJun/0006> ;
      dawgt:approval dawgt:Approved .
+
+:dawg-str-1-by-value a mf:QueryEvaluationTest ;
+     mf:name    "str-1 by value" ;
+     mf:action
+	[ qt:query  <q-str-1.rq> ;
+	  qt:data   <data-builtin-1.ttl> ] ;
+     mf:result  <result-str-1-by-value.ttl> ;
+     mf:requires mf:LiteralValues ;
+     dawgt:approval dawgt:Pending ;
+     dawgt:proposedBy <http://dydra.com>
+    .
 
 :dawg-str-2 a mf:QueryEvaluationTest ;
      mf:name    "str-2" ;
      mf:action
 	[ qt:query  <q-str-2.rq> ;
 	  qt:data   <data-builtin-1.ttl> ] ;
+     mf:requires mf:LiteralLexicalForms ;
      mf:result  <result-str-2.ttl> ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007AprJun/0006> ;
      dawgt:approval dawgt:Approved .
@@ -94,9 +109,23 @@
     mf:action
         [ qt:query  <q-datatype-2.rq> ;
 	  qt:data   <data-builtin-2.ttl> ] ;
-    mf:result  <result-datatype-2.srx> ;
+     mf:requires mf:PartialModel ;
+     mf:result  <result-datatype-2.srx> ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007AprJun/0006> ;
      dawgt:approval dawgt:Approved .
+
+
+:dawg-datatype-2-closed a mf:QueryEvaluationTest ;
+    mf:name "datatype-2 : Literals with a datatype" ;
+    rdfs:comment "updated from original test case: eliminated ordering from test" ;
+    mf:action
+        [ qt:query  <q-datatype-2.rq> ;
+	  qt:data   <data-builtin-2.ttl> ] ;
+    mf:requires mf:ClosedModel ;
+    mf:result  <result-datatype-2-closed.srx> ;
+    dawgt:proposedBy <http://dydra.com> ;
+    dawgt:approval dawgt:Pending
+    .
 
 
 :dawg-datatype-3 a mf:QueryEvaluationTest ;
@@ -244,10 +273,21 @@
     mf:action
        [ qt:query  <sameTerm.rq> ;
 	 qt:data   <data-builtin-1.ttl> ] ;
+    mf:requires mf:LiteralLexicalForms ;
      dawgt:approval dawgt:Approved ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0118/04-dawg-minutes.html> ;
     mf:result  <result-sameTerm.ttl> .
 
+:sameTerm-simple-by-value a mf:QueryEvaluationTest ;
+    mf:name    "sameTerm-simple by value" ;
+    rdfs:comment	"sameTerm(?v1, ?v2) by value" ;
+    mf:action
+       [ qt:query  <sameTerm.rq> ;
+	 qt:data   <data-builtin-1.ttl> ] ;
+    mf:requires mf:LiteralValues ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:result  <result-sameTerm-by-value.ttl> .
 
 :sameTerm-eq a mf:QueryEvaluationTest ;
     mf:name    "sameTerm-eq" ;
@@ -257,8 +297,19 @@
 	 qt:data   <data-builtin-1.ttl> ] ;
      dawgt:approval dawgt:Approved ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0118/04-dawg-minutes.html> ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <result-sameTerm-eq.ttl> .
 
+:sameTerm-eq-by-value a mf:QueryEvaluationTest ;
+    mf:name    "sameTerm-eq by value" ;
+    rdfs:comment	"sameTerm(?v1, ?v2) && ?v1 = ?v2" ;
+    mf:action
+       [ qt:query  <sameTerm-eq.rq> ;
+	 qt:data   <data-builtin-1.ttl> ] ;
+     mf:requires mf:LiteralValues ;
+     dawgt:approval dawgt:Pending ;
+     dawgt:proposedBy <http://dydra.com> ;
+    mf:result  <result-sameTerm-eq-by-value.ttl> .
 
 :sameTerm-not-eq a mf:QueryEvaluationTest ;
     mf:name    "sameTerm-not-eq" ;
@@ -268,4 +319,16 @@
 	 qt:data   <data-builtin-1.ttl> ] ;
      dawgt:approval dawgt:Approved ;
      dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007JulSep/att-0118/04-dawg-minutes.html> ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <result-sameTerm-not-eq.ttl> .
+
+:sameTerm-not-eq-by-value a mf:QueryEvaluationTest ;
+    mf:name    "sameTerm-not-eq by value" ;
+    rdfs:comment	"!sameTerm(?v1, ?v2) && ?v1 = ?v2" ;
+    mf:action
+       [ qt:query  <sameTerm-not-eq.rq> ;
+	 qt:data   <data-builtin-1.ttl> ] ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    mf:requires mf:LiteralValues ;
+    mf:result  <result-sameTerm-not-eq-by-value.ttl> .

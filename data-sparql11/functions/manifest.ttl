@@ -50,6 +50,7 @@
 	:day
 	:timezone
 	:tz
+	:tz-by-value
 	:bnode01
 	:bnode02
 	:in01
@@ -521,6 +522,7 @@
     mf:action
          [ qt:query  <timezone-01.rq> ;
            qt:data   <data.ttl> ] ;
+    mf:requires mf:LiteralLexicalForms ;
     mf:result  <timezone-01.srx> ;
 	.
 
@@ -533,6 +535,18 @@
          [ qt:query  <tz-01.rq> ;
            qt:data   <data.ttl> ] ;
     mf:result  <tz-01.srx> ;
+	.
+
+:tz-by-value rdf:type mf:QueryEvaluationTest ;
+	mf:name    "TZ()" ;
+	mf:feature sparql:tz ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:ProposedBy <http://dydra.com> ;
+    mf:action
+         [ qt:query  <tz-01.rq> ;
+           qt:data   <data.ttl> ] ;
+    mf:requires mf:LiteralValues ;
+    mf:result  <tz-01-by-value.srx> ;
 	.
 
 :bnode01 rdf:type mf:QueryEvaluationTest ;

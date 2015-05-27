@@ -10,7 +10,9 @@
     mf:entries
     ( 
         :eq-1 :eq-2 :eq-3 :eq-4 :eq-5 :eq-2-1 :eq-2-2
-        :eq-graph-1 :eq-graph-2 :eq-graph-3 :eq-graph-4 :eq-graph-5
+        :eq-graph-1 :eq-graph-1-by-value
+        :eq-graph-2 :eq-graph-2-by-value
+        :eq-graph-3 :eq-graph-4 :eq-graph-5
     ).
 
 :eq-1 a mf:QueryEvaluationTest ;
@@ -87,28 +89,71 @@
 
     # Graph versions of the equality tests
 
-      # DAWG tests are graph-equivalence, not value equivalent.
 :eq-graph-1 a mf:QueryEvaluationTest ;
+        rdfs:comment """
+DAWG tests are graph-equivalence, not value equivalent, but allow that D-entailment
+in the store may reduce the graph. This tests the case where no entailment occurs.
+""" ;
         dawgt:approval dawgt:Approved ;
         dawgt:approvedBy <http://www.w3.org/2007/06/19-dawg-minutes.html> ;
          mf:name    "Equality 1-1 -- graph" ;
-         rdfs:comment "Graph pattern matching matches exact terms, not values" ;
+         rdfs:comment "Graph pattern matching matches exact terms, not entailed values" ;
          mf:action
             [ qt:query  <query-eq-graph-1.rq> ;
               qt:data   <data-eq.ttl> ] ;
+         mf:requires mf:LiteralLexicalForms ;
          mf:result  <result-eq-graph-1.ttl>
       .
-      # DAWG tests are graph-equivalence, not value equivalent.
+
+:eq-graph-1-by-value a mf:QueryEvaluationTest ;
+        rdfs:comment """
+DAWG tests are graph-equivalence, not value equivalent, but allow that D-entailment
+in the store may reduce the graph. This tests the case where entailment does occur.
+""" ;
+        dawgt:approval dawgt:Pending ;
+        dawgt:proposedBy <http://dydra.com> ;
+         mf:name    "Equality 1-1 -- graph by value" ;
+         rdfs:comment "Graph pattern matching matches entailed values." ;
+         mf:action
+            [ qt:query  <query-eq-graph-1.rq> ;
+              qt:data   <data-eq.ttl> ] ;
+         mf:requires mf:LiteralValues ;
+         mf:result  <result-eq-graph-1-by-value.ttl>
+      .
+
+
 :eq-graph-2 a mf:QueryEvaluationTest ;
+        rdfs:comment """
+DAWG tests are graph-equivalence, not value equivalent, but allow that D-entailment
+in the store may reduce the graph. This tests the case where entailment does occur.
+""" ;
         dawgt:approval dawgt:Approved ;
         dawgt:approvedBy <http://www.w3.org/2007/06/19-dawg-minutes.html> ;
          mf:name    "Equality 1-2 -- graph" ;
-         rdfs:comment "Graph pattern matching matches exact terms, not values" ;
+         rdfs:comment "Graph pattern matching matches exact terms, not entailed values" ;
          mf:action
             [ qt:query  <query-eq-graph-2.rq> ;
               qt:data   <data-eq.ttl> ] ;
+         mf:requires mf:LiteralLexicalForms ;
          mf:result  <result-eq-graph-2.ttl>
       .
+
+:eq-graph-2-by-value a mf:QueryEvaluationTest ;
+        rdfs:comment """
+DAWG tests are graph-equivalence, not value equivalent, but allow that D-entailment
+in the store may reduce the graph. This tests the case where entailment does occur.
+""" ;
+        dawgt:approval dawgt:Pending ;
+        dawgt:proposedBy <http://dydra.com> ;
+         mf:name    "Equality 1-2 -- graph by value" ;
+         rdfs:comment "Graph pattern matching matches entailed values" ;
+         mf:action
+            [ qt:query  <query-eq-graph-2.rq> ;
+              qt:data   <data-eq.ttl> ] ;
+         mf:requires mf:LiteralValues ;
+         mf:result  <result-eq-graph-2-by-value.ttl>
+      .
+
 :eq-graph-3 a mf:QueryEvaluationTest ;
         dawgt:approval dawgt:Approved ;
         dawgt:approvedBy <http://www.w3.org/2007/06/19-dawg-minutes.html> ;

@@ -7,6 +7,12 @@
 
 <>  rdf:type mf:Manifest ;
     rdfs:label "REDUCED" ;
+    rdfs:comment """
+Reduced cardinality tests permit the processor to yield a solution field in which the respective result cardinailities is
+at most that of the specified solution. This variation is indicated by the mf:LaxCardinality property and
+the variance from the behavior of a processor which effects a distinct solution is indicated by the mf:LaxCardinality
+requirement, absent which the distinct test set is definitive.
+""" ;
     mf:entries
     ( 
       :reduced-1
@@ -14,25 +20,31 @@
     ) .
 
 :reduced-1 rdf:type mf:QueryEvaluationTest ;
-    mf:resultCardinality mf:LaxCardinality ;
     mf:name    "SELECT REDUCED *" ;
-    dawgt:approval dawgt:Approved ;
-    dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007OctDec/att-0069/13-dawg-minutes.html> ;
+    mf:resultCardinality mf:LaxCardinality ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    #dawgt:approval dawgt:Approved ;
+    #dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007OctDec/att-0069/13-dawg-minutes.html> ;
     #dawgt:approval dawgt:NotApproved ;
     
     mf:action
             [ qt:query <reduced-1.rq> ;
               qt:data <reduced-star.ttl> ] ;
+    mf:requires mf:LaxCardinality ;
     mf:result <reduced-1.srx> .
 
 :reduced-2 rdf:type mf:QueryEvaluationTest ;
-    mf:resultCardinality mf:LaxCardinality ;
     mf:name    "SELECT REDUCED ?x with strings" ;
-    dawgt:approval dawgt:Approved ;
-    dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007OctDec/att-0069/13-dawg-minutes.html> ;
+    mf:resultCardinality mf:LaxCardinality ;
+    dawgt:approval dawgt:Pending ;
+    dawgt:proposedBy <http://dydra.com> ;
+    #dawgt:approval dawgt:Approved ;
+    #dawgt:approvedBy <http://lists.w3.org/Archives/Public/public-rdf-dawg/2007OctDec/att-0069/13-dawg-minutes.html> ;
     #dawgt:approval dawgt:NotApproved ;
     mf:action
             [ qt:query  <reduced-2.rq> ;
               qt:data   <reduced-str.ttl> ] ;
+    mf:requires mf:LaxCardinality ;
     mf:result  <reduced-2.srx> .
 
